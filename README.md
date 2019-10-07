@@ -10,7 +10,7 @@ skrapio scrapes the web of tech news and presents the headlines in easy to read 
 
 ### Scraping Packages
 
-- Puppeteer
+- Request
 - Cheerio
 
 ### Deployed at:
