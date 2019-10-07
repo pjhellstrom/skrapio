@@ -6,7 +6,7 @@ const Navbar = () => {
         <div className='navbar-end'>
           <div className='navbar-item'>
             <div className='buttons'>
-              <a class='button'>
+              <a class='button' href='https://github.com/pjhellstrom/skrapio'>
                 <span class='icon'>
                   <i class='fab fa-github'></i>
                 </span>
