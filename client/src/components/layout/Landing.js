@@ -13,10 +13,15 @@ const Landing = () => {
           <h2 className='subtitle'>
             <strong>Scrape the Web of Tech News</strong>
           </h2>
-          <h2 className='subtitle'>Built with Puppeteer and Cheerio</h2>
+          <h2 className='subtitle'>Built with Cheerio</h2>
         </div>
         <br />
         <ScrapeContainer />
+      </div>
+      <div className='hero-foot'>
+        <div className='container has-text-centered'>
+          <h2 className='subtitle'>&copy; Jonas Hellstrom</h2>
+        </div>
       </div>
     </section>
   );
