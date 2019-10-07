@@ -4,7 +4,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/:selection", (req, res) => {
-  if (req.params.selection === "techcrunch") {
+  const selection = req.params.selection;
+
+  if (selection === "techcrunch") {
     const url = "https://techcrunch.com/";
 
     puppeteer
@@ -17,20 +19,37 @@ router.get("/:selection", (req, res) => {
       })
       .then(html => {
         const $ = cheerio.load(html);
-        const newsHeadlines = [];
+        const headlines = [];
         $("article.post-block").each(function() {
-          console.log(this.children);
-          newsHeadlines.push({
-            title: $(this).text(),
-            image: ""
+          headlines.push({
+            title: $(this)
+              .children("header")
+              .children("h2")
+              .children("a.post-block__title__link")
+              .text(),
+            body: $(this)
+              .children("div.post-block__content")
+              .children("p")
+              .text(),
+            link: $(this)
+              .children("header")
+              .children("h2")
+              .children("a.post-block__title__link")
+              .attr("href"),
+            image: $(this)
+              .children("footer")
+              .children("figure")
+              .children("picture")
+              .children("source")
+              .attr("srcset")
+              .split(" ")[0]
           });
         });
-
-        res.json(newsHeadlines);
+        res.json(headlines);
       })
       .catch(console.error);
   } else {
-    res.json({ msg: "That site can't be scraped at the moment" });
+    return res.json({ msg: "This site can't be scraped at the moment." });
   }
 });
 
