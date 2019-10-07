@@ -1,5 +1,5 @@
 const cheerio = require("cheerio");
-const axios = require("axios");
+const request = require("request");
 const express = require("express");
 const router = express.Router();
 
@@ -9,11 +9,12 @@ router.get("/:selection", (req, res) => {
   if (selection === "techcrunch") {
     const url = "https://techcrunch.com/";
 
-    axios
-      .get(url)
-      .then(res => {
-        const $ = cheerio.load(res.data);
+    request(url, function(error, response, html) {
+      if (!error && response.statusCode == 200) {
+        console.log("techcrunch getting articles!");
+        const $ = cheerio.load(html);
         const headlines = [];
+        console.log("article.post - block", $("article.post-block"));
         $("article.post-block").each(function() {
           headlines.push({
             title: $(this)
@@ -41,15 +42,14 @@ router.get("/:selection", (req, res) => {
           });
         });
         res.json(headlines);
-      })
-      .catch(console.error);
+      }
+    });
   } else if (selection === "macrumors") {
     const url = "https://www.macrumors.com";
 
-    axios
-      .get(url)
-      .then(res => {
-        const $ = cheerio.load(res.data);
+    request(url, function(error, response, html) {
+      if (!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
         const headlines = [];
         $("div.article").each(function() {
           headlines.push({
@@ -75,15 +75,14 @@ router.get("/:selection", (req, res) => {
           });
         });
         res.json(headlines);
-      })
-      .catch(console.error);
+      }
+    });
   } else if (selection === "technewsworld") {
     const url = "https://www.technewsworld.com";
 
-    axios
-      .get(url)
-      .then(res => {
-        const $ = cheerio.load(res.data);
+    request(url, function(error, response, html) {
+      if (!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
         const headlines = [];
         $("div.story-list").each(function() {
           headlines.push({
@@ -106,8 +105,8 @@ router.get("/:selection", (req, res) => {
           });
         });
         res.json(headlines);
-      })
-      .catch(console.error);
+      }
+    });
   } else {
     return res.json({ msg: "This site can't be scraped at the moment." });
   }
