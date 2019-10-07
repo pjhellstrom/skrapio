@@ -1,5 +1,5 @@
 const cheerio = require("cheerio");
-const puppeteer = require("puppeteer");
+const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 
@@ -9,16 +9,10 @@ router.get("/:selection", (req, res) => {
   if (selection === "techcrunch") {
     const url = "https://techcrunch.com/";
 
-    puppeteer
-      .launch()
-      .then(browser => browser.newPage())
-      .then(page => {
-        return page.goto(url).then(function() {
-          return page.content();
-        });
-      })
-      .then(html => {
-        const $ = cheerio.load(html);
+    axios
+      .get(url)
+      .then(res => {
+        const $ = cheerio.load(res.data);
         const headlines = [];
         $("article.post-block").each(function() {
           headlines.push({
@@ -52,16 +46,10 @@ router.get("/:selection", (req, res) => {
   } else if (selection === "macrumors") {
     const url = "https://www.macrumors.com";
 
-    puppeteer
-      .launch()
-      .then(browser => browser.newPage())
-      .then(page => {
-        return page.goto(url).then(function() {
-          return page.content();
-        });
-      })
-      .then(html => {
-        const $ = cheerio.load(html);
+    axios
+      .get(url)
+      .then(res => {
+        const $ = cheerio.load(res.data);
         const headlines = [];
         $("div.article").each(function() {
           headlines.push({
@@ -92,16 +80,10 @@ router.get("/:selection", (req, res) => {
   } else if (selection === "technewsworld") {
     const url = "https://www.technewsworld.com";
 
-    puppeteer
-      .launch()
-      .then(browser => browser.newPage())
-      .then(page => {
-        return page.goto(url).then(function() {
-          return page.content();
-        });
-      })
-      .then(html => {
-        const $ = cheerio.load(html);
+    axios
+      .get(url)
+      .then(res => {
+        const $ = cheerio.load(res.data);
         const headlines = [];
         $("div.story-list").each(function() {
           headlines.push({
