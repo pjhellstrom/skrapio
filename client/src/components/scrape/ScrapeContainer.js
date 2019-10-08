@@ -10,13 +10,13 @@ const ScrapeContainer = ({ scrapeSite, scrape: { scrapeResult, loading } }) => {
   return (
     <Fragment>
       <div className='container has-text-centered'>
-        {/* <a
+        <a
           className='button is-outlined is-rounded'
           onClick={() => {
             scrapeSite("techcrunch");
           }}>
           Scrape TechCrunch
-        </a> */}
+        </a>
         <a
           className='button is-outlined is-rounded'
           onClick={() => {
