@@ -120,11 +120,11 @@ router.get("/:selection", (req, res) => {
   } else if (selection === "macrumors") {
     const url = "https://www.macrumors.com";
 
-    request(url, (error, response, html) => {
+    request(url, function(error, response, html) {
       if (!error && response.statusCode == 200) {
         const $ = cheerio.load(html);
         const headlines = [];
-        $("div.article").each(() => {
+        $("div.article").each(function() {
           headlines.push({
             title: $(this)
               .children("h2")
@@ -134,8 +134,7 @@ router.get("/:selection", (req, res) => {
               .children("div.content")
               .children("div.content_inner")
               .text()
-              .substring(0, 300)
-              .concat("..."),
+              .substring(0, 100),
             link: $(this)
               .children("h2")
               .children("a")
