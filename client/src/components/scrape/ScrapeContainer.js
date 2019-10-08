@@ -36,7 +36,7 @@ const ScrapeContainer = ({ scrapeSite, scrape: { scrapeResult, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <div className=''>
+          <div className='container'>
             {scrapeResult.length > 0 ? (
               scrapeResult.map(scrape => (
                 <ScrapeCard key={scrape._id} scrape={scrape} />
@@ -44,7 +44,7 @@ const ScrapeContainer = ({ scrapeSite, scrape: { scrapeResult, loading } }) => {
             ) : (
               <Fragment>
                 <p>You have not yet scraped, please start a new scraper</p>
-                <Link to='/create' className=''>
+                <Link to='/' className=''>
                   Scrape
                 </Link>
               </Fragment>
