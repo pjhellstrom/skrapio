@@ -12,40 +12,32 @@ router.get("/:selection", (req, res) => {
   if (selection === "techcrunch") {
     const url = "https://techcrunch.com/";
 
-    puppeteer
-      .launch()
-      .then(browser => browser.newPage())
-      .then(page => {
-        return page.goto(url).then(function() {
-          return page.content();
-        });
-      })
-      .then(html => {
-        const $ = cheerio.load(html);
+    axios
+      .get(url)
+      .then(function(response) {
+        const $ = cheerio.load(response.data);
         const headlines = [];
-        $("article.post-block").each(function() {
+        $("a.post-block__title__link").each((i, element) => {
           headlines.push({
-            title: $(this)
-              .children("header")
-              .children("h2")
-              .children("a.post-block__title__link")
-              .text(),
-            body: $(this)
+            title: $(element)
+              .text()
+              .trim(),
+            body: $(element)
+              .parents()
               .children("div.post-block__content")
-              .children("p")
-              .text(),
-            link: $(this)
-              .children("header")
-              .children("h2")
+              .text()
+              .replace(/\n/, "")
+              .replace(/\t\t/, "")
+              .replace(/\t/, "")
+              .concat("..."),
+            link: $(element)
+              .parents()
               .children("a.post-block__title__link")
               .attr("href"),
-            image: $(this)
-              .children("footer")
-              .children("figure")
-              .children("picture")
+            image: $(element)
+              .parents()
               .children("source")
-              .attr("srcset"),
-            // .split(" ")[0],
+              .attr("media"),
             source: "TechCrunch"
           });
         });
@@ -128,11 +120,11 @@ router.get("/:selection", (req, res) => {
   } else if (selection === "macrumors") {
     const url = "https://www.macrumors.com";
 
-    request(url, function(error, response, html) {
+    request(url, (error, response, html) => {
       if (!error && response.statusCode == 200) {
         const $ = cheerio.load(html);
         const headlines = [];
-        $("div.article").each(function() {
+        $("div.article").each(() => {
           headlines.push({
             title: $(this)
               .children("h2")
@@ -167,6 +159,36 @@ router.get("/:selection", (req, res) => {
         const $ = cheerio.load(html);
         const headlines = [];
         $("div.story-list").each(function() {
+          headlines.push({
+            title: $(this)
+              .children("div.title")
+              .text(),
+            body: $(this)
+              .children("div.teaser")
+              .text(),
+            link: $(this)
+              .children("span.story-link")
+              .children("a")
+              .attr("href"),
+            image: $(this)
+              .children("div.image")
+              .children("a")
+              .children("img")
+              .attr("src"),
+            source: "TechNewsWorld"
+          });
+        });
+        res.json(headlines);
+      }
+    });
+  } else if (selection === "engadget") {
+    const url = "https://www.engadget.com/tag/blog/";
+
+    request(url, function(error, response, html) {
+      if (!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
+        const headlines = [];
+        $("article.o-hit").each(function() {
           headlines.push({
             title: $(this)
               .children("div.title")
