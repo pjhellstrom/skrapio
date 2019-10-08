@@ -12,7 +12,7 @@ const ScrapeCard = ({ scrape: { title, body, link, image, source } }) => {
       </figure>
       <div className='media-content'>
         <div className='content'>
-          <p>
+          <p className='media-text-size'>
             <strong>{title}</strong> <br />
             <small> From {source}</small>
             <br />

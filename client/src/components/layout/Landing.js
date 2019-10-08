@@ -8,7 +8,7 @@ const Landing = () => {
       <div className='hero-body'>
         <div className='container has-text-centered'>
           <h1 className='title'>
-            <img src={logo} width='400' />
+            <img className='main-logo' src={logo} width='400' />
           </h1>
           <h2 className='subtitle'>
             <strong>Scrape the Web of Tech News</strong>

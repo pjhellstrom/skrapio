@@ -39,3 +39,27 @@
 .footer-text {
   font-size: calc(10px + 0.7vmin);
 }
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+  .main-logo {
+    max-width: 200px;
+  }
+  .subtitle {
+    font-size: calc(10px + 0.9vmin);
+  }
+  .scrape-button {
+    font-size: calc(10px + 0.5vmin);
+  }
+  .hero-body {
+    padding: 0px;
+  }
+  .scrape-container {
+    margin: 10px auto;
+    height: 70vh;
+    max-width: 85%;
+    overflow: scroll;
+  }
+  .media-text-size {
+    font-size: calc(10px + 1vmin);
+  }
+}

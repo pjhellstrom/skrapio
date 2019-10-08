@@ -1,7 +1,5 @@
 const cheerio = require("cheerio");
 const request = require("request");
-const rp = require("request-promise");
-const puppeteer = require("puppeteer");
 const axios = require("axios");
 const express = require("express");
 const router = express.Router();
@@ -36,8 +34,10 @@ router.get("/:selection", (req, res) => {
               .attr("href"),
             image: $(element)
               .parents()
-              .children("source")
-              .attr("media"),
+              .children(
+                "footer.post-block__footer > figure:nth-child(1) > picture:nth-child(1) > source:nth-child(1)"
+              )
+              .attr("srcset"),
             source: "TechCrunch"
           });
         });
