@@ -11,18 +11,18 @@ const ScrapeContainer = ({ scrapeSite, scrape: { scrapeResult, loading } }) => {
     <Fragment>
       <div className='container has-text-centered'>
         <a
-          className='button is-outlined is-rounded'
+          className='button is-dark is-rounded'
           onClick={() => {
             scrapeSite("techcrunch");
           }}>
-          Scrape TechCrunch
+          <strong>Scrape TechCrunch</strong>
         </a>
         <a
-          className='button is-outlined is-rounded'
+          className='button is-dark is-rounded'
           onClick={() => {
             scrapeSite("macrumors");
           }}>
-          Scrape MacRumors
+          <strong>Scrape MacRumors</strong>
         </a>
         {/* <a
           className='button is-outlined is-rounded'
@@ -36,7 +36,7 @@ const ScrapeContainer = ({ scrapeSite, scrape: { scrapeResult, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container'>
+          <div className='container scrape-container'>
             {scrapeResult.length > 0 ? (
               scrapeResult.map(scrape => (
                 <ScrapeCard key={scrape._id} scrape={scrape} />

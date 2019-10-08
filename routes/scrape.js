@@ -134,7 +134,8 @@ router.get("/:selection", (req, res) => {
               .children("div.content")
               .children("div.content_inner")
               .text()
-              .substring(0, 100),
+              .substring(0, 250)
+              .concat("..."),
             link: $(this)
               .children("h2")
               .children("a")

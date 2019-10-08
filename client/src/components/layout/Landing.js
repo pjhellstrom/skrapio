@@ -20,7 +20,7 @@ const Landing = () => {
       </div>
       <div className='hero-foot'>
         <div className='container has-text-centered'>
-          <h2 className='subtitle'>&copy; Jonas Hellstrom</h2>
+          <h2 className='subtitle footer-text'>&copy; Jonas Hellstrom</h2>
         </div>
       </div>
     </section>

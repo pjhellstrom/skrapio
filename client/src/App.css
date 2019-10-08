@@ -28,3 +28,14 @@
 .button {
   margin: 5px;
 }
+
+.scrape-container {
+  margin: 10px auto;
+  height: 55vh;
+  max-width: 85%;
+  overflow: scroll;
+}
+
+.footer-text {
+  font-size: calc(10px + 0.7vmin);
+}
