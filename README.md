@@ -1,6 +1,6 @@
 # **skrapio** - A Tech News Web Scraper
 
-![skrapio](https://raw.githubusercontent.com/pjhellstrom/skrapio/master/client/src/img/skrapio_logo_sm.png)
+![skrapio](https://raw.githubusercontent.com/pjhellstrom/skrapio/master/client/src/img/skrapio_screenshot.png)
 
 ### All your favorite tech news all in one place
 
